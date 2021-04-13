@@ -41,8 +41,6 @@ public class UPDHolePunchingServer {
 
                     TimeUnit.SECONDS.sleep(2);
                 } catch (Exception e) {
-                    System.out.println(LocalDateTime.now() + ", " + e.toString() + ", i = " + i);
-                    writeOnFile(LocalDateTime.now() + ", " + e.toString() + ", i = " + i);
                     e.printStackTrace();
                 }
             } else {
@@ -61,8 +59,6 @@ public class UPDHolePunchingServer {
                     writeOnFile(LocalDateTime.now() + ", Client: " + new String(packetNotifyGetFromClient.getData()) + ", i = " + i);
 
                 } catch (Exception e) {
-                    System.out.println(LocalDateTime.now() + ", " + e.toString() + ", i = " + i);
-                    writeOnFile(LocalDateTime.now() + ", " + e.toString() + ", i = " + i);
                     e.printStackTrace();
                 }
 
