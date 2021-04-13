@@ -12,8 +12,8 @@ public class UPDHolePunchingServer {
 
         int maxSizePackage = 8;
         byte[] buf;
-        InetAddress address = InetAddress.getByName("localhost");
-        int port = 8080;
+        InetAddress address = InetAddress.getByName("0.0.0.0");
+        int port = 25147;
         int timeout = 30000;
         DatagramSocket socket = new DatagramSocket(port);
 
@@ -32,6 +32,7 @@ public class UPDHolePunchingServer {
                     address = packetPingFromClient.getAddress();
                     port = packetPingFromClient.getPort();
 
+                    System.out.println(LocalDateTime.now() + ", Client: " + new String(packetPingFromClient.getData()) + ", i = " + i);
                     writeOnFile(LocalDateTime.now() + ", Client: " + new String(packetPingFromClient.getData()) + ", i = " + i);
 
                     DatagramPacket packetPongToClient = new DatagramPacket(responsePong, responsePong.length,
@@ -40,6 +41,7 @@ public class UPDHolePunchingServer {
 
                     TimeUnit.SECONDS.sleep(2);
                 } catch (Exception e) {
+                    System.out.println(LocalDateTime.now() + ", " + e.toString() + ", i = " + i);
                     writeOnFile(LocalDateTime.now() + ", " + e.toString() + ", i = " + i);
                     e.printStackTrace();
                 }
@@ -55,9 +57,11 @@ public class UPDHolePunchingServer {
                     socket.receive(packetNotifyGetFromClient);
                     i++;
 
+                    System.out.println(LocalDateTime.now() + ", Client: " + new String(packetNotifyGetFromClient.getData()) + ", i = " + i);
                     writeOnFile(LocalDateTime.now() + ", Client: " + new String(packetNotifyGetFromClient.getData()) + ", i = " + i);
 
                 } catch (Exception e) {
+                    System.out.println(LocalDateTime.now() + ", " + e.toString() + ", i = " + i);
                     writeOnFile(LocalDateTime.now() + ", " + e.toString() + ", i = " + i);
                     e.printStackTrace();
                 }

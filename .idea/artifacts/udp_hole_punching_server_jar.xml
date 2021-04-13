@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="udp-hole-punching-server:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/udp_hole_punching_server_jar</output-path>
+    <root id="archive" name="udp-hole-punching-server.jar">
+      <element id="module-output" name="udp-hole-punching-server" />
+    </root>
+  </artifact>
+</component>
