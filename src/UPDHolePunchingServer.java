@@ -14,7 +14,7 @@ public class UPDHolePunchingServer {
         byte[] buf;
         InetAddress address = InetAddress.getByName("0.0.0.0");
         int port = 25147;
-        int timeout = 30000;
+        int timeout = 45000;
         DatagramSocket socket = new DatagramSocket(port);
 
         writeOnFile(LocalDateTime.now() + ", " + "Server start");
@@ -39,7 +39,7 @@ public class UPDHolePunchingServer {
                             address, port);
                     socket.send(packetPongToClient);
 
-                    TimeUnit.SECONDS.sleep(2);
+                    TimeUnit.SECONDS.sleep(30);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
