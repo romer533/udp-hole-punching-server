@@ -12,13 +12,15 @@ public class NotifyThread extends Thread {
     private InetAddress address;
     private int port;
     private DatagramSocket socket;
-    private int timeout = 60000;
+    private int timeout = 10000;
+    private int j;
 
-    public NotifyThread(InetAddress address, int port, DatagramSocket socket, int maxSizePackage) throws Exception {
+    public NotifyThread(InetAddress address, int port, DatagramSocket socket, int maxSizePackage, int j) throws Exception {
         this.address = address;
         this.port = port;
         this.maxSizePackage = maxSizePackage;
         this.socket = socket;
+        this.j = j;
     }
 
     @Override
@@ -39,16 +41,17 @@ public class NotifyThread extends Thread {
 //                System.out.println("Я получил гет");
                 i++;
 
-                System.out.println(LocalDateTime.now() + ", Client: " + new String(packetFromClient.getData()) + ", i = " + i);
-                writeOnFile(LocalDateTime.now() + ", Client: " + new String(packetFromClient.getData()) + ", i = " + i);
+                System.out.println(LocalDateTime.now() + ", " + j + " Client: " + new String(packetFromClient.getData()) + ", i = " + i);
+                writeOnFile(LocalDateTime.now() + ", " + j + " Client: " + new String(packetFromClient.getData()) + ", i = " + i);
 
             } catch (Exception e) {
 //                writeOnFile(LocalDateTime.now() + ", " + e.toString() + ", i = " + i);
+                Thread.currentThread().destroy();
             }
             try {
                 Thread.sleep((long)(30 + Math.random() * 90) * 1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+
             }
         }
     }
