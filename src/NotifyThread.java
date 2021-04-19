@@ -42,14 +42,14 @@ public class NotifyThread extends Thread {
                 DatagramPacket packetFromClient = new DatagramPacket(buf, buf.length, address, port);
                 System.out.println("Я отправил нотифай");
                 synchronized (pong) {
-                    pong.destroy();
+                    pong.wait();
                     socket.send(packetToClient);
                     socket.setSoTimeout(timeout);
                     System.out.println("Я жду гета");
                     socket.receive(packetFromClient);
                     System.out.println("Я получил гет");
                     i++;
-                    pong.start();
+                    pong.notify();
                 }
 
                 System.out.println(LocalDateTime.now() + ", " + j + " Client: " + new String(packetFromClient.getData()) + ", i = " + i);
